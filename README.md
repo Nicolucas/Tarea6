@@ -1,6 +1,6 @@
 Autores:
 
-Juliana Ayala
+Juliana Maria Ayala G.
 
 Jorge Nicolas Hayek V.
 
