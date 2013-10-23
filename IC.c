@@ -2,13 +2,17 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#define PI 3.14159
+
+int const PI= 3.14159;
+int const G=6.67384*pow(10,-11);//en Nm²/kg²
 
 float conv_kpc_m(float a);
 float conv_m_kpc(float a);
 float conv_msolar_kg(float a);
 float conv_kg_msolar(float a);
 float magn_v(float m,float g, float r);
+
+
 //-------------Main---------------
 int main(int argc, char **argv){
   system("clear");
@@ -24,7 +28,7 @@ int main(int argc, char **argv){
   float V_xo=atof(argv[3]);
   float V_yo=atof(argv[4]);
 
-  printf("Los datos introducidos fueron: \nX: %f\Y: nV_X %f\nV_Y%f\n",xo,yo,V_xo,V_yo);
+  printf("Los datos introducidos fueron: \nX: %f\nY: nV_X %f\nV_Y%f\n",xo,yo,V_xo,V_yo);
  
 /*------------------------------------------------------------------------
 Checkpoint; Los datos de posicion y velocidades fueron introducidos
@@ -36,11 +40,11 @@ Output
 distancia de las orbitas
 Masa
 --------------------------------------------------------------------------*/
-  int num_particles=120.0; 
+  int num_particles=120; 
   FILE *output;
   float dist_orbi=10.0; //en kpc
-  float masa=pow(10.0,12.0) //masas solares
-
+  float masa=pow(10.0,12.0); //masas solares
+	
 /*---------------------------------------------------------
 Data memory allocation
 x,y estan en kpc
@@ -74,7 +78,31 @@ quinta: 36
 
 es decir se divide 2PI entre el numero de particulas en cada orbita, teniendo el angulo, se le da una ubicacion en coordenadas cartesianas considerando el radio y se les suma la posicion de la masa central
 -----------------------------------------------------------*/ 
+  int (par_1)=12;
+  int (par_2)=18;
+  int (par_3)=24;
+  int (par_4)=30;
+  int (par_5)=36;
 
+  float firstorb=2*PI/(par_1);
+  float secondorb=2*PI/(par_2);
+  float thirdorb=2*PI/(par_3);
+  float fourthorb=2*PI/(par_4);
+  float fifthorb=2*PI/(par_5);
+
+  int alpha=0;
+
+  //radio =10 kpc
+  float radio=10.0;
+
+  for (int i=0;i<par_1;i++){
+    x_axis[i]=radio*cos(firstorb*i);
+    y_axis[i]=radio*sin(firstorb*i);
+    
+  }
+  alpha+=(par_1);
+
+ 
 /*---------------------------------------------------------
 luego se calcula la magnitud de la velocidad de cada particula y se separa la componente vertical de la horizontal y se guarda en los array de velocidades, luego se suma la velocidad de la particula central
 -----------------------------------------------------------*/ 
@@ -92,44 +120,3 @@ FIN
   return 0;
 }
 
-
-
-
-/*---------------------------------------------------------
-Funciones
------------------------------------------------------------*/  
-
-float conv_kpc_m(float a){
-  dato=a*3.0*pow(10.0,16.0);
-  return dato;
-}
-// convierte de kpc a metros
-
-float conv_m_kpc(float a){
-  dato=a/(3.0*pow(10.0,16.0));
-  return dato;
-}
-// convierte de metros a kpc
-
-float conv_msolar_kg(float a){
-  dato=a*(1.989*pow(10.0,30.0));
-  return dato
-}
-// convierte de kg a masas solares
-
-float conv_kg_msolar(float a){
-  dato=a/(1.989*pow(10.0,30.0));
-  return dato
-}
-// convierte de masas solares a kg
-
-float magn_v(float m,float g, float r){
-  dato=m*g/r;
-  dato2=sqrt(dato);
-  return dato2;
-}
-/*---------------------------------------------------------
-a_centripeta=v²/r=M*G/r²
-v²=M*G/r
-magnitud de la velocidad en la orbita dada = sqrt(M*G/r)
------------------------------------------------------------*/

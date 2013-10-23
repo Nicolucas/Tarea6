@@ -11,10 +11,14 @@ int main(int argc, char **argv){
   system("clear");
 
 /*---------------------------------------------------------
-llama el archivo producido 
+llama el archivo producido y lo coloca en distintos arrays cada columna
 -----------------------------------------------------------*/  
 /*---------------------------------------------------------
-FIN
+Usando RUNGEKUTTA, se aplica a cada particula alrededor de la particula central el cambio de posicion y velocidades por cada cambio de tiempo
+-----------------------------------------------------------*/  
+
+/*---------------------------------------------------------
+exporta los datos de posicion y velocidades por cada particula en varios archivos que representan una ubicacion en el tiempo
 -----------------------------------------------------------*/  
 
 /*---------------------------------------------------------
