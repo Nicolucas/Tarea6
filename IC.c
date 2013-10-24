@@ -107,6 +107,7 @@ es decir se divide 2PI entre el numero de particulas en cada orbita, teniendo el
 luego se calcula la magnitud de la velocidad de cada particula y se separa la componente vertical de la horizontal y se guarda en los array de velocidades, luego se suma la velocidad de la particula central
 -----------------------------------------------------------*/ 
 
+
 /*---------------------------------------------------------
 se guarda la primera columna de datos introducidos en posicion -1 y los arrays en orden de posicones y velocidades de 0 hasta el numero de particulas
 -----------------------------------------------------------*/ 
