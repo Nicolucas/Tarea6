@@ -7,8 +7,9 @@ codigo que evoluciona un archivo con condiciones iniciales
 #include <string.h>
 #define PI 3.14159
 
-float fun_prime (float t, float x, float y, float V_x, float V_y);
+float fun_prime (int n, float t, float x, float y, float V_x, float V_y);
 
+//Main
 int main(int argc, char **argv){
   system("clear");
 
@@ -33,25 +34,18 @@ se aplica a cada particula alrededor de la particula central el cambio de posici
 velocidades dado por la interaccion con cada particula central presente por cada cambio de tiempo 
 -----------------------------------------------------------*/  
 
-    float h=5000;
-    float n=1000;
+    int h=5000;
+    int n=1000;
+    float *x;
+    float *y;
+    float *V_x;
+    float *V_y;
+    x= malloc(n*sizeof(float));
+    y= malloc(n*sizeof(float));
+    V_x= malloc(n*sizeof(float));
+    V_y= malloc(n*sizeof(float));
 	
-    float *x= malloc(n*size(float));
-    float *y= malloc(n*size(float));
-    float *V_x= malloc(n*size(float));
-    float *V_y= malloc(n*size(float);
-	
-    float fun_prime (float t, float x, float y, float V_x, float V_y){
 
-	float *posicion;
-        float *velocidad;
-
-        posicion= malloc(n*size(float));
-	velocidad= malloc(n*size(float));
-
-        return posicion, velocidad;
-
-    }
     	
 
 /*---------------------------------------------------------
@@ -63,3 +57,13 @@ FIN
 -----------------------------------------------------------*/   
   return 0;
 }
+float fun_prime (int n,float t, float x, float y, float V_x, float V_y){
+
+	float *posicion;
+        float *velocidad;
+        posicion= malloc(n*sizeof(float));
+	velocidad= malloc(n*sizeof(float));
+
+        return n;
+
+    }
