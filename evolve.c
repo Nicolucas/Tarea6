@@ -27,6 +27,7 @@ llama el archivo producido y lo coloca en distintos arrays cada columna
     yo= malloc(120*sizeof(float));
     V_xo= malloc(120*sizeof(float));
     V_yo= malloc(120*sizeof(float));
+
     
 /*---------------------------------------------------------
 Usando RUNGEKUTTA:
