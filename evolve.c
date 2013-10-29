@@ -7,17 +7,52 @@ codigo que evoluciona un archivo con condiciones iniciales
 #include <string.h>
 #define PI 3.14159
 
+float fun_prime (float t, float x, float y, float V_x, float V_y);
+
 int main(int argc, char **argv){
   system("clear");
 
 /*---------------------------------------------------------
 llama el archivo producido y lo coloca en distintos arrays cada columna
 -----------------------------------------------------------*/  
+    FILE *ic = fopen(argv[1], "r");
+ 	
+    float *xo;
+    float *yo;
+    float *V_xo;
+    float *V_yo;
+    
+    xo= malloc(120*sizeof(float));
+    yo= malloc(120*sizeof(float));
+    V_xo= malloc(120*sizeof(float));
+    V_yo= malloc(120*sizeof(float));
+    
 /*---------------------------------------------------------
 Usando RUNGEKUTTA:
 se aplica a cada particula alrededor de la particula central el cambio de posicion y 
 velocidades dado por la interaccion con cada particula central presente por cada cambio de tiempo 
 -----------------------------------------------------------*/  
+
+    float h=5000;
+    float n=1000;
+	
+    float *x= malloc(n*size(float));
+    float *y= malloc(n*size(float));
+    float *V_x= malloc(n*size(float));
+    float *V_y= malloc(n*size(float);
+	
+    float fun_prime (float t, float x, float y, float V_x, float V_y){
+
+	float *posicion;
+        float *velocidad;
+
+        posicion= malloc(n*size(float));
+	velocidad= malloc(n*size(float));
+
+        return posicion, velocidad;
+
+    }
+    	
 
 /*---------------------------------------------------------
 exporta los datos de posicion y velocidades por cada particula en varios archivos que representan una ubicacion en el tiempo
