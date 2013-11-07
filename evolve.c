@@ -167,25 +167,28 @@ velocidades dado por la interaccion con cada particula central presente por cada
     float *data;
     data=malloc(num_lineas*sizeof(float));
     int time=0;
+
+    //Avanza en el tiempo
     while(time<200000){
       //printf("%d \n",time);
+      //Por cada particula, avanza
       for(part=0;part<num_lineas;part++){
 	if (time==100000) {
 	  for(part=0;part<num_lineas;part++){
 	    float lala1=V_x[part]*(3.0*pow(10,16))/(3.1536*pow(10,11));
 	    float lala2=V_y[part]*(3.0*pow(10,16))/(3.1536*pow(10,11));
 	    //printf("%d %f %f %f %f\n",part,x[part],y[part],lala1,lala2);
-	    fprintf(output1,"%d %f %f %f %f\n",part,x[part],y[part],lala1,lala2);
+	    fprintf(output1,"%d %f %f %f %f\n",ID[part],x[part],y[part],lala1,lala2);
 	  }
 	}
 
-	if(ID[j]==-1)
+	if(ID[part]==-1)
 	  {
 	    if(centros==1){
 	      time+=h;
-	      x[j]+=(V_x[j]*h);
-	      y[j]+=(V_y[j]*h);
-	     
+	      x[part]+=(V_x[part]*h);
+	      y[part]+=(V_y[part]*h);
+	      
 	    }  
 	    else{
 
@@ -200,7 +203,7 @@ velocidades dado por la interaccion con cada particula central presente por cada
 	  }
       
  
-	else //(ID[j]>-1)
+	else //(ID[part]>-1)
 	  {
 	    data=RungeKutta(time,x[part],y[part],V_x[part],Cx,Cy,ID,0);
 	    x[part]=data[1];
@@ -209,7 +212,6 @@ velocidades dado por la interaccion con cada particula central presente por cada
 	    y[part]=data[1];
 	    V_y[part]=data[2];
 	    time+=h;
-	    
 	  }
       }
     }
