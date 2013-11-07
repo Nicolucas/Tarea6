@@ -1,7 +1,7 @@
-all:grafica1.png
+all:Grafica1.png
 
 
-grafica1.png:plots.py
+Grafica1.png:plots.py
 	python plots.py IC_output.dat Datos1.dat Datos2.dat Datos3.dat Datos4.dat Datos5.dat
 
 Datos5.dat:Datos4.dat
