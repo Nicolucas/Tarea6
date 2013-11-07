@@ -6,9 +6,9 @@ codigo que evoluciona un archivo con condiciones iniciales
 #include <math.h>
 #include <string.h>
 
-const float G=4.86  *pow(10,-24); //Constante gravitacional en Kpc3/(mSolares * year2)
-const float m=pow(10,12); //Masa solar
-const float h=10000;//year
+const float G=4.86  *pow(10,-6); //Constante gravitacional en Kpc3/(mSolares *kyear2)
+const float m=1; //Masa solar
+const float h=10;//kyear
 
 
 float func_prime_1(float x,float y_1,float x_1,float y_2,float *x_m,float *y_m,int *id,int a);
@@ -81,8 +81,8 @@ Registro de Datos en los arrays
     for(j=0;j<num_lineas;j++){
       fscanf(input, "%d %f %f %f %f\n",&ID[j], &x[j],&y[j],&V_x[j],&V_y[j]);//en kpc, km/s
       
-      V_x[j]=V_x[j]*(3.1536*pow(10,7)/(3.0*pow(10,16)));//en kpc/yr
-      V_y[j]=V_y[j]*(3.1536*pow(10,7)/(3.0*pow(10,16)));
+      V_x[j]=V_x[j]*(3.1536*pow(10,10)/(3.0*pow(10,16)));//en kpc/kyr
+      V_y[j]=V_y[j]*(3.1536*pow(10,10)/(3.0*pow(10,16)));
       
       // printf("%d %f %f %f %f\n",ID[j],x[j],y[j],V_x[j],V_y[j]);
       /*
@@ -110,7 +110,6 @@ velocidades dado por la interaccion con cada particula central presente por cada
     printf("# de Centros de Galaxias: %d\n",centros);
 
     /*-----------------------------------------------------------------------------------------
-
     Crea una lista de la ubicacion y velocidades de los nuevos centros de masa
       --------------------------------------------------------------------------------------*/
     int *CID;
@@ -142,14 +141,14 @@ velocidades dado por la interaccion con cada particula central presente por cada
       Crea grupos de archivos de salida
       --------------------------------------------------------------------------------------*/
 
-    int maximo=100000000;
+    int maximo=100000;
     int p;
     FILE *output1, *out;
 
-    for (p=0;p<10;p++){
+    for (p=1;p<10;p++){
       
       char filename1[100];
-      sprintf(filename1,"evolve_output%d.dat",p);
+      sprintf(filename1,"Datos%d.dat",p);
   
 
       out=fopen(filename1,"r");
@@ -167,20 +166,26 @@ velocidades dado por la interaccion con cada particula central presente por cada
    
     float *data;
     data=malloc(num_lineas*sizeof(float));
-    float time;
-
+    int time=0;
+    while(time<200000){
+      //printf("%d \n",time);
       for(part=0;part<num_lineas;part++){
-	if (time>1000000000) {
-	  fprintf(output1,"%d %f %f %f %f\n",part,x[part],y[part],V_x[part]/((3.1536*pow(10,7))/(3.0*pow(10,16))),V_y[part]/((3.1536*pow(10,7))/(3.0*pow(10,16))));
-	  
+	if (time==100000) {
+	  for(part=0;part<num_lineas;part++){
+	    float lala1=V_x[part]*(3.0*pow(10,16))/(3.1536*pow(10,11));
+	    float lala2=V_y[part]*(3.0*pow(10,16))/(3.1536*pow(10,11));
+	    //printf("%d %f %f %f %f\n",part,x[part],y[part],lala1,lala2);
+	    fprintf(output1,"%d %f %f %f %f\n",part,x[part],y[part],lala1,lala2);
 	  }
+	}
 
 	if(ID[j]==-1)
 	  {
 	    if(centros==1){
 	      time+=h;
-	      x[j]+=V_x[j]*h;
-	      y[j]+=V_y[j]*h;
+	      x[j]+=(V_x[j]*h);
+	      y[j]+=(V_y[j]*h);
+	     
 	    }  
 	    else{
 
@@ -207,7 +212,7 @@ velocidades dado por la interaccion con cada particula central presente por cada
 	    
 	  }
       }
-    
+    }
 
     
     
@@ -234,9 +239,6 @@ FIN
 /*---------------------------------------------------------
 FUNCIONES
 -----------------------------------------------------------*/  
-
-
-
 float func_prime_1(float x,float y_1,float x_1,float y_2,float *x_m,float *y_m,int *id,int a){
   return y_2;
 }
@@ -294,7 +296,6 @@ float *RungeKutta(float x_old, float y1_old,float x_1, float y2_old,float *x_m,f
   float k3= func_prime_1(x2,y2,x_1,y21,x_m, y_m,id,a);
   float k31= func_prime_2(x2,y2,x_1,y21,x_m, y_m,id,a);
 
-
   //tercer paso
   
   float x3=x_old + (h);
@@ -309,8 +310,6 @@ float *RungeKutta(float x_old, float y1_old,float x_1, float y2_old,float *x_m,f
   float prom_k2=(1.0/6.0)*(k11 + 2.0*k21+ 2.0*k31 + k41);
   
 
-
-
   //entrega de datos
   float x_new =x_old + h;
   float y1_new=y1_old + h*prom_k1;
@@ -320,5 +319,4 @@ float *RungeKutta(float x_old, float y1_old,float x_1, float y2_old,float *x_m,f
   mojo[1]=y1_new;
   mojo[2]=y2_new;
   return mojo;
-
 }
